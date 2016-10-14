@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>CRM - HappyWay!</title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<link rel="icon" type="image/png"
+		href="https://image.freepik.com/icones-gratis/brinquedo-bloco-de-carta_318-46752.jpg" />
+
+
+</h:head>
+<h:body>
+	<div id="cabecalho">
+		<h:form id="logoCompany">
+			<h:commandLink action="#{loginBean.vaiParaDash}">
+				<h:graphicImage library="imagens" name="logo1.png" />
+			</h:commandLink>
+		</h:form>
+
+		<div id="usuarioLogado">
+			<h:form rendered="#{loginBean.logado}"> Logado	como: #{loginBean.usuario.login}
+				
+				<h:commandLink value="[Sair]" action="#{loginBean.deslogar}" />
+			</h:form>
+		</div>
+	</div>
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+	<div id="rodape" align="center">Copyright 2016. Todos os Direitos
+		reservados a Alpha Technology.</div>
+</h:body>
+</html>

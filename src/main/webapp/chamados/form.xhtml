@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template.xhtml">
+	<ui:define name="corpo">
+		<div id="conteudo">
+			<h:form>
+				<h:inputHidden value="#{formularioChamadoBean.chamado.id}" />
+				<p:growl id="growl" showDetail="true" sticky="true" />
+
+				<fieldset>
+					<legend>
+						<h1>
+							<h:outputLabel value="Inclusão"
+								rendered="#{empty formularioChamadoBean.chamado.id}" />
+
+							<h:outputLabel value="Alteração"
+								rendered="#{not empty formularioChamadoBean.chamado.id}" />
+						</h1>
+					</legend>
+					<h:panelGrid columns="3" cellpadding="5" id="grid">
+
+						<p:outputLabel value="Título" for="titulo" />
+						<p:inputText id="titulo"
+							requiredMessage="É necessário informar o título"
+							value="#{formularioChamadoBean.chamado.titulo}" required="true" />
+						<p:message for="titulo" display="icon" />
+
+
+						<p:outputLabel value="Descrição" for="descricao" />
+						<p:inputTextarea cols="20" rows="10" id="descricao"
+							value="#{formularioChamadoBean.chamado.descricao}"
+							required="true"
+							requiredMessage="Descrição do chamado é obrigatóra">
+						</p:inputTextarea>
+						<p:message for="descricao" display="icon" />
+
+
+						<p:outputLabel value="Tipo" for="tipo" />
+						<p:selectOneRadio id="tipo"
+							value="#{formularioChamadoBean.chamado.tipo}" required="true"
+							requiredMessage="Necessário informar o tipo do chamado">
+							<f:selectItems value="#{formularioChamadoBean.tipos}" var="tipo"
+								itemLabel="#{tipo}" itemValue="#{tipo}" />
+						</p:selectOneRadio>
+						<p:message for="tipo" display="icon" />
+
+						<p:outputLabel value="Produto" for="produto" />
+
+						<p:selectOneMenu id="produto"
+							value="#{formularioChamadoBean.idProduto}" required="true"
+							requiredMessage="É necessário indicar o produto">
+
+							<f:selectItems value="#{formularioChamadoBean.produtos}"
+								var="produto" itemLabel="#{produto.nome}"
+								itemValue="#{produto.id}" />
+
+						</p:selectOneMenu>
+
+						<p:message for="produto" display="icon" />
+
+
+						<p:outputLabel for="status" value="Status"
+							rendered="#{loginBean.admin}" />
+						<p:selectOneMenu id="status" rendered="#{loginBean.admin}"
+							value="#{formularioChamadoBean.chamado.status}">
+							<f:selectItems value="#{formularioChamadoBean.listaStatus}"
+								var="status" itemLabel="#{status}" itemValue="#{status}" />
+						</p:selectOneMenu>
+
+						<br />
+						<p:commandButton value="Gravar"
+							action="#{formularioChamadoBean.salvar}" update="@all" />
+					</h:panelGrid>
+
+				</fieldset>
+			</h:form>
+			<br /> <br />
+			<h:form>
+				<h:commandButton value="Ir para lista"
+					action="#{formularioChamadoBean.vaiParaLista}" />
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

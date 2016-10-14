@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template.xhtml">
+	<ui:define name="corpo">
+		<div id="conteudo">
+			<h1 align="center">Seja bem-vindo ao Sistema</h1>
+
+			<br />
+
+			<h:form>
+				<p:menu toggleable="true" align="center">
+					<p:submenu label="Gerencial" rendered="#{loginBean.admin}">
+						<p:menuitem value="Gráficos" url="/graficos/graficos.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Opções">
+						<p:menuitem value="Lista" url="/chamados/list.xhtml" />
+						<p:menuitem value="Novo Chamado" url="/chamados/form.xhtml" />
+					</p:submenu>
+				</p:menu>
+			</h:form>
+			<h:graphicImage library="imagens" name="bg.jpeg" />
+		</div>
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

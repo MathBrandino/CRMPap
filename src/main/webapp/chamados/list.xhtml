@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template.xhtml">
+	<ui:define name="corpo">
+		<div id="conteudo">
+			<h:form>
+				<p:dataTable id="lista" value="#{listaChamadoBean.lista}"
+					var="chamado" paginator="true" rows="5">
+					<p:column headerText="ID" sortBy="#{chamado.id}">
+						<p:outputLabel value="#{chamado.id}" />
+					</p:column>
+					<p:column headerText="Titulo">
+						<p:outputLabel value="#{chamado.titulo}" />
+					</p:column>
+					<p:column headerText="Descrição">
+						<p:outputLabel value="#{chamado.descricao}" />
+					</p:column>
+					<p:column headerText="Tipo" sortBy="#{chamado.tipo}">
+						<p:outputLabel value="#{chamado.tipo}" />
+					</p:column>
+					<p:column headerText="Data" sortBy="#{chamado.data.time}">
+						<p:outputLabel value="#{chamado.data.time}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" locale="pt_BR"
+								timeZone="GMT-03:00" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Produto" sortBy="#{chamado.produto.id}">
+						<p:outputLabel value="#{chamado.produto.nome}" />
+					</p:column>
+
+					<p:column headerText="Status" sortBy="#{chamado.status}">
+						<p:outputLabel value="#{chamado.status}" />
+					</p:column>
+
+					<p:column headerText="Comandos">
+
+						<p:commandLink value="Deletar"
+							action="#{listaChamadoBean.deleta(chamado.id)}">
+							<f:ajax render="lista" immediate="true" />
+						</p:commandLink>
+						<br></br>
+						<p:commandLink value="Editar"
+							action="#{listaChamadoBean.vaiProForm}">
+							<f:setPropertyActionListener value="#{chamado}"
+								target="#{chamadoBean.chamado}" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="Usuario" rendered="#{loginBean.admin}"
+						filterBy="#{chamado.usuario.login}">
+						<p:outputLabel value="#{chamado.usuario.login}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+			<br />
+			<h:form>
+				<h:commandButton value="Nova Sugestão / Reclamação"
+					action="#{listaChamadoBean.vaiProForm}" />
+
+			</h:form>
+
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

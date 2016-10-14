@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template.xhtml">
+	<ui:define name="corpo">
+		<div id="conteudo">
+			<p:growl id="growl" />
+			<fieldset>
+				<legend>
+					<h1>Novo Usuário</h1>
+				</legend>
+				<h:form>
+					<h:panelGrid columns="2">
+
+						<p:outputLabel value="Login" for="login" />
+						<p:inputText id="login" value="#{cadastroLoginBean.usuario.login}"
+							required="true" requiredMessage="Login é obrigátorio" />
+
+
+						<p:outputLabel value="Senha" for="senha" />
+						<p:password id="senha" value="#{cadastroLoginBean.usuario.senha}"
+							required="true" requiredMessage="Senha é obrigatória" />
+
+						<p:outputLabel value="Nivel de Usuário" for="niveis" />
+						<p:selectOneRadio value="#{cadastroLoginBean.usuario.nivel}"
+							required="true" requiredMessage="Usuario precisa ter nível"
+							id="niveis">
+							<f:selectItems value="#{cadastroLoginBean.niveis}" var="nivel"
+								itemLabel="#{nivel}" itemValue="#{nivel}" />
+						</p:selectOneRadio>
+
+
+						<p:commandButton value="Salvar"
+							action="#{cadastroLoginBean.salvar}" update="growl" />
+					</h:panelGrid>
+
+				</h:form>
+
+
+			</fieldset>
+			<br />
+			<h:form>
+				<p:commandButton value="Voltar para login"
+					action="#{cadastroLoginBean.vaiParaLogin}" />
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
